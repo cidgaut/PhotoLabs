@@ -4,7 +4,8 @@ import "../styles/PhotoListItem.scss";
 
 
 
-const PhotoListItem = ({ id, location, imageSource, username, profile }) => {
+const PhotoListItem = ({ photo }) => {
+  const { id, location, imageSource, username, profile } = photo;
   return (
     <article className="photo-list-item">
     <img src={imageSource} alt={`Photo by ${username}`} className="photo-img" />

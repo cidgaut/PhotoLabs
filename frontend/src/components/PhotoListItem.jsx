@@ -9,10 +9,12 @@ const PhotoListItem = ({ photo }) => {
   return (
     <article className="photo-list__item">
     <img src={imageSource} alt={`Photo by ${username}`} className="photo-list__image" />
-      <div className="photo-list__user-profile">
+      <div className="photo-list__user-details">
         <img src={profile} alt={`Profile of ${username}`} className="photo-list__user-profile" />
-        <p className="photo-list__user-location">{location.city}, {location.country}</p>
-        <p className="photo-list__user-info">{username}</p>
+        <div className="photo-list__user-info">
+          <p className="photo-list__user-location">{location.city}, {location.country}</p>
+          <p>{username}</p>
+        </div>
       </div>
     </article>
  );

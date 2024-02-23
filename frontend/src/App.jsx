@@ -4,9 +4,7 @@ import React from 'react';
 import './App.scss';
 
 //components
-import PhotoList from './components/PhotoList';
-import TopicList from 'components/TopicList';
-import TopNavigation from 'components/TopNavigationBar';
+import HomeRoute from 'routes/HomeRoute';
 
 
 // Note: Rendering a single component to build components in isolation
@@ -17,9 +15,7 @@ const App = () => {
       {/*photos.map((photo, index) =>
       <PhotoListItem key={index} photo={photo}/>
   )*/}
-      <TopNavigation />
-     
-      <PhotoList />
+      <HomeRoute />
     </div>
   );
 };

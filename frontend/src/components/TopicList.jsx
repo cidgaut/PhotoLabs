@@ -5,9 +5,9 @@ import TopicListItem from "./TopicListItem";
 import topics from "../mocks/topics";
 
 
-const TopicList = (props) => {
+const TopicList = () => {
 
-  const topicItems = props.topics.map((topic) => (
+  const topicItems = topics.map((topic) => (
     <TopicListItem
       key={topic.id}
       topic={topic}

@@ -5,10 +5,10 @@ import PhotoListItem from "./PhotoListItem";
 import photos from "../mocks/photos";
 
 
-const PhotoList = (props) => {
+const PhotoList = () => {
 
 
-  const photoItems = props.photos.map((photos) => (
+  const photoItems = photos.map((photo) => (
     <PhotoListItem
       key={photo.id}
       photo={photo}

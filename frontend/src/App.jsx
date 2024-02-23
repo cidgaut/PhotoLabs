@@ -27,7 +27,8 @@ const App = () => {
       <HomeRoute topics={topics} photos={photos}
       setModal={setModal}
       modal={setModal}/>
-      {modal && <PhotoDetailsModal />}
+      {modal && <PhotoDetailsModal setModal={setModal}
+      modal={modal} />}
       <button onClick={toggleModal}>Toggle Modal</button>
     </div>
   );

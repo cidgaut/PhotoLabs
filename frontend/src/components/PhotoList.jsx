@@ -5,13 +5,17 @@ import PhotoListItem from "./PhotoListItem";
 import photos from "../mocks/photos";
 
 
-const PhotoList = () => {
+const PhotoList = (props) => {
+
+  const { photos, toggleFavorite, favoritePhotos }= props;
 
 
   const photoItems = photos.map((photo) => (
     <PhotoListItem
       key={photo.id}
       photo={photo}
+      toggleFavorite={() => toggleFavorite(photo.id)}
+          isFavorite={favoritePhotos.includes(photo.id)}
     />
   ));
   

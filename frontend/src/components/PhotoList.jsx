@@ -7,15 +7,16 @@ import photos from "../mocks/photos";
 
 const PhotoList = (props) => {
 
-  const { photos, toggleFavorite, favoritePhotos }= props;
+  const { photos, toggleFavorite, favoritePhotos}= props;
 
 
-  const photoItems = photos.map((photo) => (
+  const photoItems = props.photos.map((photo) => (
     <PhotoListItem
       key={photo.id}
       photo={photo}
       toggleFavorite={() => toggleFavorite(photo.id)}
           isFavorite={favoritePhotos.includes(photo.id)}
+          setModal={props.setModal}
     />
   ));
   

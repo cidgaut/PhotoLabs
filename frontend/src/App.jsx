@@ -13,13 +13,22 @@ import PhotoDetailsModal from 'routes/PhotoDetailsModal';
 // Note: Rendering a single component to build components in isolation
 const App = () => {
 
+  const [modal, setModal] = useState(false);
+
+  const toggleModal = () => {
+    setModal(!modal);
+  };
+
   return (
     <div className="App">
       {/*photos.map((photo, index) =>
       <PhotoListItem key={index} photo={photo}/>
   )*/}
-      <HomeRoute topics={topics} photos={photos}/>
-      <PhotoDetailsModal />
+      <HomeRoute topics={topics} photos={photos}
+      setModal={setModal}
+      modal={setModal}/>
+      {modal && <PhotoDetailsModal />}
+      <button onClick={toggleModal}>Toggle Modal</button>
     </div>
   );
 };

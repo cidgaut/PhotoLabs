@@ -5,7 +5,12 @@ import PhotoFavButton from "./PhotoFavButton";
 
 
 const PhotoListItem = (props) => {
-  const { toggleFavorite, isFavorite } = props;
+  const { toggleFavorite, isFavorite, setModal, photo } = props;
+
+  const handleClick = () => {
+    setModal(true);
+    props.setSelectedPhoto(photo);
+  }
 
   return (
     <article className="photo-list__item">

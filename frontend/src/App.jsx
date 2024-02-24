@@ -1,4 +1,4 @@
-import React, {useCallback, useState } from 'react';
+import React, { useState } from 'react';
 
 //styling
 import './App.scss';
@@ -14,6 +14,7 @@ import PhotoDetailsModal from 'routes/PhotoDetailsModal';
 const App = () => {
 
   const [modal, setModal] = useState(false);
+  const [selectedPhoto, setSelectedPhoto] = useState(null);
 
   const toggleModal = () => {
     setModal(!modal);
@@ -21,14 +22,13 @@ const App = () => {
 
   return (
     <div className="App">
-      {/*photos.map((photo, index) =>
-      <PhotoListItem key={index} photo={photo}/>
-  )*/}
+
       <HomeRoute topics={topics} photos={photos}
       setModal={setModal}
-      modal={setModal}/>
-      {modal && <PhotoDetailsModal />}
+      setSelectedPhoto={setSelectedPhoto}/>
+      {modal && <PhotoDetailsModal modal={selectedPhoto} setmodal={setModal} />}
       <button onClick={toggleModal}>Toggle Modal</button>
+
     </div>
   );
 };

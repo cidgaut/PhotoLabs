@@ -26,7 +26,7 @@ const App = () => {
       <HomeRoute topics={topics} photos={photos}
       setModal={setModal}
       setSelectedPhoto={setSelectedPhoto}/>
-      {modal && <PhotoDetailsModal modal={modal} setmodal={setModal} selectedPhoto={selectedPhoto}/>}
+      {modal && <PhotoDetailsModal modal={modal} setModal={setModal} selectedPhoto={selectedPhoto}/>}
       <button onClick={toggleModal}>Toggle Modal</button>
 
     </div>

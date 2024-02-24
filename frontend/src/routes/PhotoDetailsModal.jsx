@@ -5,11 +5,11 @@ import closeSymbol from '../assets/closeSymbol.svg';
 
 const PhotoDetailsModal = (props) => {
   const toggleModal = () => {
-    console.log("toggle modal", props.setModal);
+    console.log("toggle modal", setModal);
     props.setModal((prevModal) => !prevModal);
   };
 
-  console.log(props.modal);
+  console.log(props.selectedPhoto);
 
   return (
     <div className="photo-details-modal">

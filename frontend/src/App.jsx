@@ -17,9 +17,8 @@ const App = () => {
   const [selectedPhoto, setSelectedPhoto] = useState(null);
 
   const toggleModal = () => {
-    setModal(!modal);
+    props.setModal((prevModal) => !prevModal);
   };
-
   return (
     <div className="App">
 

@@ -21,7 +21,7 @@ const App = () => {
 
   return (
     <div className="App">
-      {/*photos.map((photo, index) =>
+      {/*photos.map((photo, index) => 
       <PhotoListItem key={index} photo={photo}/>
   )*/}
       <HomeRoute topics={topics} photos={photos}

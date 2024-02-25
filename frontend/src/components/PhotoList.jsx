@@ -15,7 +15,7 @@ const PhotoList = (props) => {
       key={photo.id}
       photo={photo}
       toggleFavorite={() => toggleFavorite(photo.id)}
-          isFavorite={favoritePhotos.includes(photo.id)}
+          isFavorite={(favoritePhotos || []).includes(photo.id)}
           setModal={props.setModal}
           photos={photos}
     />

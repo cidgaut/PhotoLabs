@@ -7,7 +7,8 @@ import PhotoList from '../components/PhotoList';
 
 const PhotoDetailsModal = (props) => {
   const { setModal, selectedPhoto, toggleFavorite, isFavorite } = props;
-  
+  const similar_photosArray = Object.values(selectedPhoto.similar_photos || {});
+  console.log("similar photos", similar_photosArray)
 
   useEffect(() => {
     //log photo details to console when selectedPhoto changes
@@ -39,7 +40,7 @@ const PhotoDetailsModal = (props) => {
           <h1>Similar Photos</h1>
         </div>
         <div className='photo-details-modal__images'>
-          {/* I can't seem to get my map to populate the similar_photos */}
+          <PhotoList photos={similar_photosArray}  />
         </div>
       </div>
     

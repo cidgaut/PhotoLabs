@@ -21,33 +21,6 @@ const App = () => {
     onClosePhotoDetailsModal,
   } = useApplicationData();
 
-  const [modal, setModal] = useState(false);
-
-  const [selectedPhoto, setSelectedPhoto] = useState(null);
-
-  //added this line for global favourites
-  const [favoritePhotos, setFavoritePhotos] = useState([]);
-
-  const toggleFavorite = (photoId) => {
-    setFavoritePhotos((prevFavorites) =>
-      prevFavorites.includes(photoId)
-        ? prevFavorites.filter((id) => id !== photoId)
-        : [...prevFavorites, photoId]
-    );
-  };
-
-  // Function to open modal with photo details
-  const openModal = (photo) => {
-    setSelectedPhoto(photo);
-    setModal(true);
-  };
-
-  // Function to close modal
-  const closeModal = () => {
-    setSelectedPhoto(null);
-    setModal(false);
-  };
-
   return (
     <div className="App">
 
@@ -55,21 +28,20 @@ const App = () => {
       <HomeRoute
         topics={topics}
         photos={photos}
-        setModal={openModal}
-        modal={modal}
-        favoritePhotos={favoritePhotos}
-        setFavoritePhotos={setFavoritePhotos}
+        setModal={setPhotoSelected}
+        modal={state.modalOpen}
+        favoritePhotos={state.favoritePhotos}
+        setFavoritePhotos={updateToFavPhotoIds}
       />
 
       {/* PhotoDetailsModal if modal is true */}
       {modal && (
       <PhotoDetailsModal
-        selectedPhoto={selectedPhoto}
-        setModal={closeModal}
-        modal={modal}
-        favoritePhotos={favoritePhotos}
-        setFavoritePhotos={setFavoritePhotos}
-        toggleFavorite={toggleFavorite}
+        selectedPhoto={state.selectedPhoto}
+        setModal={onClosePhotoDetailsModal}
+        modal={state.modalOpen}
+        favoritePhotos={state.favoritePhotos}
+        setFavoritePhotos={updateToFavPhotoIds}
       />
       )}
     </div>

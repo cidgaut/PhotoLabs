@@ -12,15 +12,20 @@ const useApplicationData = () => {
   
 
   const updateToFavPhotoIds = (photoId) => {
-    // i named my variables differently and I'm not sure what to put in here
+    setState((prev) => ({
+      ...prev,
+      favoritePhotos: prev.favoritePhotos.includes(photoId)
+        ? prev.favoritePhotos.filter((id) => id !== photoId)
+        : [...prev.favoritePhotos, photoId],
+    }));
   };
 
   const setPhotoSelected = (photo) => {
-    // i named my variables differently and I'm not sure what to put in here
+    setState((prev) => ({ ...prev, selectedPhoto: photo }));
   };
 
   const onClosePhotoDetailsModal = () => {
-    // i named my variables differently and I'm not sure what to put in here
+    setState((prev) => ({ ...prev, modalOpen: false }));
   };
 
   

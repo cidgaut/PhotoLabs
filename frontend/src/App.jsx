@@ -35,7 +35,7 @@ const App = () => {
       />
 
       {/* PhotoDetailsModal if modal is true */}
-      {modal && (
+      {state.modalOpen && (
       <PhotoDetailsModal
         selectedPhoto={state.selectedPhoto}
         setModal={onClosePhotoDetailsModal}

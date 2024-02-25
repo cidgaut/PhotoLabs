@@ -1,3 +1,7 @@
+main {
+ background-color: #838383;
+}
+
 .photo-details-modal {
   background-color: white;
   box-shadow: 0 0 0 50vmax rgba(0,0,0,.5);
@@ -31,7 +35,7 @@
 
 .photo-details-modal__image {
   max-width: 95%;
-  border-radius: 8px;
+
 }
 
 .photo-details-modal__top-bar {

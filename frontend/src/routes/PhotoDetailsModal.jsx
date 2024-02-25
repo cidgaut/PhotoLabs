@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import '../styles/PhotoDetailsModal.scss'
 import closeSymbol from '../assets/closeSymbol.svg';
 
 const PhotoDetailsModal = (props) => {
+  const { setModal, selectedPhoto } = props;
+
+  useEffect(() => {
+    //log photo details to console when selectedPhoto changes
+    console.log("Selected Photo Details:", selectedPhoto);
+  }, [selectedPhoto]);
+  
   const toggleModal = () => {
-    props.setModal((prevModal) => !prevModal);
+    setModal((prevModal) => !prevModal);
   };
 
   return (

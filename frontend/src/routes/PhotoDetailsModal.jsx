@@ -2,9 +2,12 @@ import React, { useEffect } from 'react';
 
 import '../styles/PhotoDetailsModal.scss'
 import closeSymbol from '../assets/closeSymbol.svg';
+import PhotoFavButton from '../components/PhotoFavButton';
+import PhotoList from '../components/PhotoList';
 
 const PhotoDetailsModal = (props) => {
-  const { setModal, selectedPhoto } = props;
+  const { setModal, selectedPhoto, toggleFavorite, isFavorite } = props;
+  
 
   useEffect(() => {
     //log photo details to console when selectedPhoto changes
@@ -16,11 +19,32 @@ const PhotoDetailsModal = (props) => {
   };
 
   return (
-    <div className="photo-details-modal">
+    <article className="photo-details-modal">
+  
       <button onClick={toggleModal} className="photo-details-modal__close-button">
         <img src={closeSymbol} alt="close symbol" />
       </button>
-    </div>
+
+      <div className='photo-details-modal__images'>
+      <PhotoFavButton onClick={toggleFavorite} isFavorite={isFavorite}/>
+        <img src={selectedPhoto.urls.full} className='photo-details-modal__image' />
+        <div className="photo-details-modal__photographer-details">
+          <img src={selectedPhoto.user.profile}  className="photo-details-modal__photographer-profile" />
+          <div>
+            <p className="photo-details-modal__photographer-info">{selectedPhoto.user.username}</p>
+            <p className="photo-details-modal__photographer-location">{selectedPhoto.location.city}, {selectedPhoto.location.country}</p>
+          </div>
+        </div>
+        <div className='photo-details-modal__header'>
+          <h1>Similar Photos</h1>
+        </div>
+        <div className='photo-details-modal__images'>
+          {/* I can't seem to get my map to populate the similar_photos */}
+        </div>
+      </div>
+    
+    </article>
+  
   )
 };
 

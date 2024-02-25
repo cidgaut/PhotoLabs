@@ -14,9 +14,25 @@ function reducer(state, action) {
     case ACTIONS.FAV_PHOTO_ADDED:
       return {
         ...state,
-        favoritePhotos: state.favoritePhotos.includes(action.payload.id)
-          ? state.favoritePhotos.filter((id) => id !== action.payload.id)
-          : [...state.favoritePhotos, action.payload.id],
+        favoritePhotos: [...state.favoritePhotos, action.payload.id],
+      };
+    
+    case ACTIONS.FAV_PHOTO_REMOVED:
+      return {
+        ...state,
+        favoritePhotos: state.favoritePhotos.filter((id) => id !== action.payload.id),
+      };
+
+    case ACTIONS.SELECT_PHOTO:
+      return {
+        ...state,
+        selectedPhoto: action.payload.photo,
+      };
+
+    case ACTIONS.DISPLAY_PHOTO_DETAILS:
+      return {
+        ...state,
+        modalOpen: action.payload.modalOpen,
       };
 
     default:

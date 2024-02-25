@@ -17,6 +17,17 @@ const App = () => {
 
   const [selectedPhoto, setSelectedPhoto] = useState(null);
 
+  //added this line for global favourites
+  const [favoritePhotos, setFavoritePhotos] = useState([]);
+
+  const toggleFavorite = (photoId) => {
+    setFavoritePhotos((prevFavorites) =>
+      prevFavorites.includes(photoId)
+        ? prevFavorites.filter((id) => id !== photoId)
+        : [...prevFavorites, photoId]
+    );
+  };
+
   // Function to open modal with photo details
   const openModal = (photo) => {
     setSelectedPhoto(photo);
@@ -38,6 +49,8 @@ const App = () => {
         photos={photos}
         setModal={openModal}
         modal={modal}
+        favoritePhotos={favoritePhotos}
+        setFavoritePhotos={setFavoritePhotos}
       />
 
       {/* PhotoDetailsModal if modal is true */}
@@ -46,6 +59,9 @@ const App = () => {
         selectedPhoto={selectedPhoto}
         setModal={closeModal}
         modal={modal}
+        favoritePhotos={favoritePhotos}
+        setFavoritePhotos={setFavoritePhotos}
+        toggleFavorite={toggleFavorite}
       />
       )}
     </div>

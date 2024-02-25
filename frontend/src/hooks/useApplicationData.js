@@ -6,7 +6,8 @@ export const ACTIONS = {
   SET_PHOTO_DATA: 'SET_PHOTO_DATA',
   SET_TOPIC_DATA: 'SET_TOPIC_DATA',
   SELECT_PHOTO: 'SELECT_PHOTO',
-  DISPLAY_PHOTO_DETAILS: 'DISPLAY_PHOTO_DETAILS'
+  DISPLAY_PHOTO_DETAILS: 'DISPLAY_PHOTO_DETAILS',
+  GET_PHOTOS_BY_TOPIC: 'GET_PHOTOS_BY_TOPIC'
 };
 
   const reducer = function(state, action) {
@@ -65,14 +66,14 @@ export const ACTIONS = {
     const [state, dispatch] = useReducer(reducer, initialState);
 
     useEffect(() => {
-
-      fetch("/api/photos")
-        .then((response) => response.json())
-        .then((data) => dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: data }));
-  
-      fetch("/api/topics")
-        .then((response) => response.json())
-        .then((data) => dispatch({ type: ACTIONS.SET_TOPIC_DATA, payload: data }));
+      Promise.all([
+        fetch("/api/photos").then((response) => response.json()),
+        fetch("/api/topics").then((response) => response.json())
+      ])
+      .then(([photoData, topicData]) => {
+        dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: photoData });
+        dispatch({ type: ACTIONS.SET_TOPIC_DATA, payload: topicData });
+      });
     }, []);
 
   const updateToFavPhotoIds = (photoId) => {
@@ -87,13 +88,23 @@ export const ACTIONS = {
     dispatch({ type: ACTIONS.DISPLAY_PHOTO_DETAILS, payload: { modalOpen: false } });
   };
 
-  
+  const getPhotosByTopic = async (topicId) => {
+    try {
+      const response = await fetch(`http://localhost:8001/api/topics/photos/${topicId}`);
+      const data = await response.json();
+
+      dispatch({ type: ACTIONS.GET_PHOTOS_BY_TOPIC, payload: { topicId, photos: data } });
+    } catch (error) {
+      console.error('Error fetching photos by topic:', error);
+    }
+  };
 
   return {
     state,
     updateToFavPhotoIds,
     setPhotoSelected,
     onClosePhotoDetailsModal,
+    getPhotosByTopic,
   };
 };
 

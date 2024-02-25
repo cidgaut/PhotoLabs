@@ -5,8 +5,6 @@ import './App.scss';
 
 //components
 import HomeRoute from 'routes/HomeRoute';
-import topics from "./mocks/topics";
-import photos from "./mocks/photos";
 import PhotoDetailsModal from 'routes/PhotoDetailsModal';
 import useApplicationData from 'hooks/useApplicationData';
 
@@ -26,8 +24,8 @@ const App = () => {
 
     {/* Passing props to home route */}
       <HomeRoute
-        topics={topics}
-        photos={photos}
+        topics={state.topicData}
+        photos={state.photoData}
         setModal={setPhotoSelected}
         modal={state.modalOpen}
         favoritePhotos={state.favoritePhotos}

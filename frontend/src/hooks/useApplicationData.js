@@ -1,4 +1,4 @@
-import { useReducer } from 'react';
+import { useReducer, useEffect } from 'react';
 
 export const ACTIONS = {
   FAV_PHOTO_ADDED: 'FAV_PHOTO_ADDED',
@@ -9,44 +9,71 @@ export const ACTIONS = {
   DISPLAY_PHOTO_DETAILS: 'DISPLAY_PHOTO_DETAILS'
 };
 
-function reducer(state, action) {
-  switch (action.type) {
-    case ACTIONS.FAV_PHOTO_ADDED:
-      return {
-        ...state,
-        favoritePhotos: [...state.favoritePhotos, action.payload.id],
-      };
-    
-    case ACTIONS.FAV_PHOTO_REMOVED:
-      return {
-        ...state,
-        favoritePhotos: state.favoritePhotos.filter((id) => id !== action.payload.id),
-      };
+  const reducer = function(state, action) {
+    switch (action.type) {
+      case ACTIONS.FAV_PHOTO_ADDED:
+        return {
+          ...state,
+          favoritePhotos: [...state.favoritePhotos, action.payload.id],
+        };
+      
+      case ACTIONS.FAV_PHOTO_REMOVED:
+        return {
+          ...state,
+          favoritePhotos: state.favoritePhotos.filter((id) => id !== action.payload.id),
+        };
+  
+      case ACTIONS.SELECT_PHOTO:
+        return {
+          ...state,
+          selectedPhoto: action.payload.photo,
+        };
+  
+      case ACTIONS.DISPLAY_PHOTO_DETAILS:
+        return {
+          ...state,
+          modalOpen: action.payload.modalOpen,
+        };
 
-    case ACTIONS.SELECT_PHOTO:
+        case ACTIONS.SET_PHOTO_DATA:
       return {
-        ...state,
-        selectedPhoto: action.payload.photo,
-      };
+          ...state,
+          photoData: action.payload
+        };
 
-    case ACTIONS.DISPLAY_PHOTO_DETAILS:
-      return {
-        ...state,
-        modalOpen: action.payload.modalOpen,
-      };
+      case ACTIONS.SET_TOPIC_DATA:
+        return {
+          ...state,
+          topicData: action.payload
+        };
 
-    default:
-      throw new Error(`Tried to reduce with unsupported action type: ${action.type}`);
+      default:
+        throw new Error(`Tried to reduce with unsupported action type: ${action.type}`);
+    }
   }
-}
 
-const useApplicationData = () => {
-  const [state, dispatch] = useReducer(reducer, {
-    photos: [],
-    favoritePhotos: [],
-    selectedPhoto: null,
-    modalOpen: false,
-  });
+  const useApplicationData = () => {
+    const initialState = {
+      photos: [],
+      favoritePhotos: [],
+      selectedPhoto: null,
+      modalOpen: false,
+      photoData: [],
+      topicData: [],
+    };
+
+    const [state, dispatch] = useReducer(reducer, initialState);
+
+    useEffect(() => {
+
+      fetch("/api/photos")
+        .then((response) => response.json())
+        .then((data) => dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: data }));
+  
+      fetch("/api/topics")
+        .then((response) => response.json())
+        .then((data) => dispatch({ type: ACTIONS.SET_TOPIC_DATA, payload: data }));
+    }, []);
 
   const updateToFavPhotoIds = (photoId) => {
     dispatch({ type: ACTIONS.FAV_PHOTO_ADDED, payload: { id: photoId } });

@@ -67,12 +67,21 @@ export const ACTIONS = {
 
     useEffect(() => {
       Promise.all([
-        fetch("/api/photos").then((response) => response.json()),
-        fetch("/api/topics").then((response) => response.json())
+        fetch("/api/photos").then((response) => response.json()).catch(error => {
+          console.error("Error fetching photo data:", error);
+          console.log("Non-JSON response:", response.text());
+        }),
+        fetch("/api/topics").then((response) => response.json()).catch(error => {
+          console.error("Error fetching topic data:", error);
+          console.log("Non-JSON response:", response.text());
+        })
       ])
       .then(([photoData, topicData]) => {
         dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: photoData });
         dispatch({ type: ACTIONS.SET_TOPIC_DATA, payload: topicData });
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
       });
     }, []);
 
@@ -90,7 +99,7 @@ export const ACTIONS = {
 
   const getPhotosByTopic = async (topicId) => {
     try {
-      const response = await fetch(`http://localhost:8001/api/topics/photos/${topicId}`);
+      const response = await fetch("/api/topics");
       const data = await response.json();
 
       dispatch({ type: ACTIONS.GET_PHOTOS_BY_TOPIC, payload: { topicId, photos: data } });

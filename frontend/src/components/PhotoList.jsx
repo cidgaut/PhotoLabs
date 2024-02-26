@@ -6,7 +6,7 @@ import PhotoListItem from "./PhotoListItem";
 
 const PhotoList = (props) => {
 
-  const { photos, toggleFavorite, favoritePhotos}= props;
+  const { photos, toggleFavorite, favoritePhotos, setPhotoSelected }= props;
 
 
   const photoItems = props.photos.map((photo) => (
@@ -17,6 +17,7 @@ const PhotoList = (props) => {
           isFavorite={(favoritePhotos || []).includes(photo.id)}
           setModal={props.setModal}
           photos={photos}
+          setPhotoSelected={setPhotoSelected}
     />
   ));
   

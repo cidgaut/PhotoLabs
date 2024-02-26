@@ -17,6 +17,7 @@ const App = () => {
     updateToFavPhotoIds,
     setPhotoSelected,
     onClosePhotoDetailsModal,
+    getPhotosByTopic,
   } = useApplicationData();
 
   return (
@@ -28,6 +29,7 @@ const App = () => {
         photos={state.photoData}
         setModal={setPhotoSelected}
         modal={state.modalOpen}
+        //my modal is not opening with the onClick event
         favoritePhotos={state.favoritePhotos}
         setFavoritePhotos={updateToFavPhotoIds}
       />

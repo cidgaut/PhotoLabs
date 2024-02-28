@@ -20,6 +20,8 @@ const App = () => {
     getPhotosByTopic,
   } = useApplicationData();
 
+  console.log("get photos by topic:", getPhotosByTopic)
+
   return (
     <div className="App">
 
@@ -28,10 +30,12 @@ const App = () => {
         topics={state.topicData}
         photos={state.photoData}
         setModal={setPhotoSelected}
+        setPhotoSelected={setPhotoSelected}
         modal={state.modalOpen}
         //my modal is not opening with the onClick event
         favoritePhotos={state.favoritePhotos}
         setFavoritePhotos={updateToFavPhotoIds}
+        getPhotosByTopic={getPhotosByTopic}
       />
 
       {/* PhotoDetailsModal if modal is true */}

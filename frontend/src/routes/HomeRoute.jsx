@@ -15,11 +15,14 @@ const HomeRoute = (props) => {
         : [...prevFavorites, photoId]
     );
   };
-
+  console.log("getPhotosbytopic homeroute", props.getPhotosByTopic);
   return (
     <div className="home-route">
-      <TopNavigation topics={props.topics} favoriteCount={favoritePhotos.length}/>
-      <PhotoList photos={props.photos} toggleFavorite={toggleFavorite} favoritePhotos={favoritePhotos} setModal={props.setModal}/>
+      <TopNavigation
+      topics={props.topics}
+      favoriteCount={favoritePhotos.length} getPhotosByTopic={props.getPhotosByTopic}/>
+      <PhotoList photos={props.photos} toggleFavorite={toggleFavorite} favoritePhotos={favoritePhotos} setModal={props.setModal}
+      setPhotoSelected={props.setPhotoSelected}/>
     </div>
   );
 };

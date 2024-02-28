@@ -48,6 +48,12 @@ export const ACTIONS = {
           topicData: action.payload
         };
 
+        case ACTIONS.GET_PHOTOS_BY_TOPIC:
+          return {
+            ...state,
+            
+          }
+
       default:
         throw new Error(`Tried to reduce with unsupported action type: ${action.type}`);
     }
@@ -90,7 +96,9 @@ export const ACTIONS = {
   };
 
   const setPhotoSelected = (photo) => {
+    console.log("setPhotoSelected called", photo);
     dispatch({ type: ACTIONS.SELECT_PHOTO, payload: { photo } });
+    dispatch({ type: ACTIONS.DISPLAY_PHOTO_DETAILS, payload: { modalOpen: true } });
   };
 
   const onClosePhotoDetailsModal = () => {
@@ -99,10 +107,11 @@ export const ACTIONS = {
 
   const getPhotosByTopic = async (topicId) => {
     try {
-      const response = await fetch("/api/topics");
+      console.log("topic ID:", topicId)
+      const response = await fetch(`http://localhost:8001/api/topics/photos/${topicId}`);
       const data = await response.json();
 
-      dispatch({ type: ACTIONS.GET_PHOTOS_BY_TOPIC, payload: { topicId, photos: data } });
+      dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: data });
     } catch (error) {
       console.error('Error fetching photos by topic:', error);
     }

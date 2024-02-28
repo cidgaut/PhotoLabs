@@ -6,11 +6,12 @@ import FavBadge from './FavBadge';
 
 
 const TopNavigation = (props) => {
-  const { favoriteCount } = props;
+  const { favoriteCount, getPhotosByTopic } = props;
+  console.log("getPhotosbytopic navigation",getPhotosByTopic);
   return (
     <div className="top-nav-bar">
       <span className="top-nav-bar__logo">PhotoLabs</span>
-      <TopicList topics={props.topics}/>
+      <TopicList topics={props.topics} getPhotosByTopic={props.getPhotosByTopic}/>
       <FavBadge isFavPhotoExist={favoriteCount > 0}/>
     </div>
   )

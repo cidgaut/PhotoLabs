@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import '../styles/PhotoDetailsModal.scss'
 import closeSymbol from '../assets/closeSymbol.svg';
@@ -6,9 +6,18 @@ import PhotoFavButton from '../components/PhotoFavButton';
 import PhotoList from '../components/PhotoList';
 
 const PhotoDetailsModal = (props) => {
-  const { setModal, selectedPhoto, favoritePhotos, setFavoritePhotos } = props;
+  const [favoritePhotos, setFavoritePhotos] = useState([]);
+  const { setModal, selectedPhoto } = props;
   const similar_photosArray = Object.values(selectedPhoto.similar_photos || {});
   console.log("similar photos", similar_photosArray)
+
+  const toggleFavorite = (photoId) => {
+    setFavoritePhotos((prevFavorites) =>
+      prevFavorites.includes(photoId)
+        ? prevFavorites.filter((id) => id !== photoId)
+        : [...prevFavorites, photoId]
+    );
+  };
 
   useEffect(() => {
     //log photo details to console when selectedPhoto changes
@@ -28,10 +37,7 @@ const PhotoDetailsModal = (props) => {
 
       <div className='photo-details-modal__images'>
       <PhotoFavButton
-        
-      
-        setFavoritePhotos={setFavoritePhotos}
-        favoritePhotos={favoritePhotos}
+        onClick={toggleFavorite}
         />
         <img src={selectedPhoto.urls.full} className='photo-details-modal__image' />
         <div className="photo-details-modal__photographer-details">

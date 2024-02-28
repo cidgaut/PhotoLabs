@@ -9,7 +9,6 @@ const PhotoDetailsModal = (props) => {
   const [favoritePhotos, setFavoritePhotos] = useState([]);
   const { setModal, selectedPhoto } = props;
   const similar_photosArray = Object.values(selectedPhoto.similar_photos || {});
-  console.log("similar photos", similar_photosArray)
 
   const toggleFavorite = (photoId) => {
     setFavoritePhotos((prevFavorites) =>
@@ -21,7 +20,6 @@ const PhotoDetailsModal = (props) => {
 
   useEffect(() => {
     //log photo details to console when selectedPhoto changes
-    console.log("Selected Photo Details:", selectedPhoto);
   }, [selectedPhoto]);
   
   const toggleModal = () => {

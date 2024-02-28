@@ -75,11 +75,10 @@ export const ACTIONS = {
       Promise.all([
         fetch("/api/photos").then((response) => response.json()).catch(error => {
           console.error("Error fetching photo data:", error);
-          console.log("Non-JSON response:", response.text());
+         
         }),
         fetch("/api/topics").then((response) => response.json()).catch(error => {
           console.error("Error fetching topic data:", error);
-          console.log("Non-JSON response:", response.text());
         })
       ])
       .then(([photoData, topicData]) => {
@@ -96,7 +95,6 @@ export const ACTIONS = {
   };
 
   const setPhotoSelected = (photo) => {
-    console.log("setPhotoSelected called", photo);
     dispatch({ type: ACTIONS.SELECT_PHOTO, payload: { photo } });
     dispatch({ type: ACTIONS.DISPLAY_PHOTO_DETAILS, payload: { modalOpen: true } });
   };
@@ -107,7 +105,6 @@ export const ACTIONS = {
 
   const getPhotosByTopic = async (topicId) => {
     try {
-      console.log("topic ID:", topicId)
       const response = await fetch(`http://localhost:8001/api/topics/photos/${topicId}`);
       const data = await response.json();
 

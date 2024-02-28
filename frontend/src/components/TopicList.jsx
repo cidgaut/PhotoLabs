@@ -2,14 +2,11 @@ import React from "react";
 
 import "../styles/TopicList.scss";
 import TopicListItem from "./TopicListItem";
-import topics from "../mocks/topics";
 
 
 const TopicList = (props) => {
 
   const { topics, getPhotosByTopic} = props;
-  console.log("getPhotosbytopic topiclist",getPhotosByTopic);
-  console.log("topics topicslog", topics);
   const topicItems = topics.map((topic) => (
     
     <TopicListItem

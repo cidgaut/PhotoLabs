@@ -3,6 +3,19 @@ The PhotoLabs project for the Web Development React course programming.
 
 # Photolabs
 
+The landing page
+![Home Page](docs/HomeRoute.png)
+
+Topics - Animal View
+![Topic](docs/Topics.png)
+
+Modal View
+![Modal View](docs/Modal.png)
+
+Similar Photos
+![Similar Photos](docs/Similar.png)
+
+
 ## Setup
 
 Install dependencies with `npm install` in each respective `/frontend` and `/backend`.

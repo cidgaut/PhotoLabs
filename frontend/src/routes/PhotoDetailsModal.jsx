@@ -9,7 +9,6 @@ const PhotoDetailsModal = (props) => {
   const [favoritePhotos, setFavoritePhotos] = useState([]);
   const { setModal, selectedPhoto } = props;
   const similar_photosArray = Object.values(selectedPhoto.similar_photos || {});
-  console.log("Similar photos Array:",similar_photosArray)
 
   const toggleFavorite = (photoId) => {
     //favorite now works for their respective image in the modal

@@ -9,9 +9,10 @@ const PhotoDetailsModal = (props) => {
   const [favoritePhotos, setFavoritePhotos] = useState([]);
   const { setModal, selectedPhoto } = props;
   const similar_photosArray = Object.values(selectedPhoto.similar_photos || {});
+  console.log("Similar photos Array:",similar_photosArray)
 
-  const toggleFavorite = () => {
-    const photoId = selectedPhoto.id;
+  const toggleFavorite = (photoId) => {
+    //favorite now works for their respective image in the modal
     setFavoritePhotos((prevFavorites) =>
       prevFavorites.includes(photoId)
         ? prevFavorites.filter((id) => id !== photoId)
@@ -56,7 +57,7 @@ const PhotoDetailsModal = (props) => {
           favoritePhotos={favoritePhotos}
           setModal={setModal} 
           toggleFavorite={toggleFavorite}
-          selectedPhotoId={selectedPhoto.id}/>
+          />
         </div>
       </div>
     

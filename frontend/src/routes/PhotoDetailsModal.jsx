@@ -56,7 +56,7 @@ const PhotoDetailsModal = (props) => {
           favoritePhotos={favoritePhotos}
           setModal={setModal} 
           toggleFavorite={toggleFavorite}
-          setPhotoSelected={selectedPhoto}/>
+          selectedPhotoId={selectedPhoto.id}/>
         </div>
       </div>
     

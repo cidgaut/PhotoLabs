@@ -8,9 +8,11 @@ const PhotoListItem = (props) => {
   const { toggleFavorite, isFavorite, photo, setPhotoSelected } = props;
 
   const handleImageClick = () => {
-    setPhotoSelected(photo)
+    if (setPhotoSelected) {
+      setPhotoSelected(photo)
+    }
   }
-
+  
   return (
     <article className="photo-list__item">
       <PhotoFavButton toggleFavorite={toggleFavorite} isFavorite={isFavorite}/>

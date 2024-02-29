@@ -10,7 +10,8 @@ const PhotoDetailsModal = (props) => {
   const { setModal, selectedPhoto } = props;
   const similar_photosArray = Object.values(selectedPhoto.similar_photos || {});
 
-  const toggleFavorite = (photoId) => {
+  const toggleFavorite = () => {
+    const photoId = selectedPhoto.id;
     setFavoritePhotos((prevFavorites) =>
       prevFavorites.includes(photoId)
         ? prevFavorites.filter((id) => id !== photoId)
@@ -35,8 +36,10 @@ const PhotoDetailsModal = (props) => {
 
       <div className='photo-details-modal__images'>
       <PhotoFavButton
-        onClick={toggleFavorite}
-        />
+        toggleFavorite={() => toggleFavorite(selectedPhoto.id)}
+        isFavorite={favoritePhotos.includes(selectedPhoto.id)}
+      />
+        
         <img src={selectedPhoto.urls.full} className='photo-details-modal__image' />
         <div className="photo-details-modal__photographer-details">
           <img src={selectedPhoto.user.profile}  className="photo-details-modal__photographer-profile" />
@@ -49,7 +52,11 @@ const PhotoDetailsModal = (props) => {
           <h1>Similar Photos</h1>
         </div>
         <div className='photo-details-modal__images'>
-          <PhotoList photos={similar_photosArray}  favoritePhotos={favoritePhotos} setModal={setModal}/>
+          <PhotoList photos={similar_photosArray} 
+          favoritePhotos={favoritePhotos}
+          setModal={setModal} 
+          toggleFavorite={toggleFavorite}
+          setPhotoSelected={selectedPhoto}/>
         </div>
       </div>
     

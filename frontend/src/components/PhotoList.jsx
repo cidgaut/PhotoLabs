@@ -8,12 +8,12 @@ const PhotoList = (props) => {
 
   const { photos, toggleFavorite, favoritePhotos, setPhotoSelected }= props;
 
-  console.log("photos", props.photos.photos)
-  const photoItems = props.photos.map((photo) => (
+
+  const photoItems = photos.map((photo) => (
     <PhotoListItem
       key={photo.id}
       photo={photo}
-      toggleFavorite={() => toggleFavorite(photo.id)}
+      toggleFavorite={toggleFavorite}
           isFavorite={(favoritePhotos || []).includes(photo.id)}
           setModal={props.setModal}
           photos={photos}

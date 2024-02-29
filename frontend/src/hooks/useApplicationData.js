@@ -1,5 +1,6 @@
 import { useReducer, useEffect } from 'react';
 
+// Define different actions for the useReducer
 export const ACTIONS = {
   FAV_PHOTO_ADDED: 'FAV_PHOTO_ADDED',
   FAV_PHOTO_REMOVED: 'FAV_PHOTO_REMOVED',
@@ -11,44 +12,52 @@ export const ACTIONS = {
 };
 
   const reducer = function(state, action) {
+    // Reducer function to handle different actions
     switch (action.type) {
       case ACTIONS.FAV_PHOTO_ADDED:
+        // Logic for handling favoriting a photo
         return {
           ...state,
           favoritePhotos: [...state.favoritePhotos, action.payload.id],
         };
       
       case ACTIONS.FAV_PHOTO_REMOVED:
+        // Logic for handling unfavorite a photo
         return {
           ...state,
           favoritePhotos: state.favoritePhotos.filter((id) => id !== action.payload.id),
         };
   
       case ACTIONS.SELECT_PHOTO:
+        // Logic for selecting a photo
         return {
           ...state,
           selectedPhoto: action.payload.photo,
         };
   
       case ACTIONS.DISPLAY_PHOTO_DETAILS:
+        // Logic for displaying photo details
         return {
           ...state,
           modalOpen: action.payload.modalOpen,
         };
 
         case ACTIONS.SET_PHOTO_DATA:
+          // Logic for setting photo data
       return {
           ...state,
           photoData: action.payload
         };
 
       case ACTIONS.SET_TOPIC_DATA:
+        // Logic for setting topic data
         return {
           ...state,
           topicData: action.payload
         };
 
         case ACTIONS.GET_PHOTOS_BY_TOPIC:
+          // Logic for getting photos by topic
           return {
             ...state,
             
@@ -60,6 +69,7 @@ export const ACTIONS = {
   }
 
   const useApplicationData = () => {
+    // Custom hook for managing application data and state
     const initialState = {
       photos: [],
       favoritePhotos: [],
@@ -72,6 +82,7 @@ export const ACTIONS = {
     const [state, dispatch] = useReducer(reducer, initialState);
 
     useEffect(() => {
+      // Fetch photo data and topic data on component mount
       Promise.all([
         fetch("/api/photos").then((response) => response.json()).catch(error => {
           console.error("Error fetching photo data:", error);
@@ -91,19 +102,23 @@ export const ACTIONS = {
     }, []);
 
   const updateToFavPhotoIds = (photoId) => {
+    // Function to update favorite photos
     dispatch({ type: ACTIONS.FAV_PHOTO_ADDED, payload: { id: photoId } });
   };
 
   const setPhotoSelected = (photo) => {
+    // Function to set selected photo and display photo details
     dispatch({ type: ACTIONS.SELECT_PHOTO, payload: { photo } });
     dispatch({ type: ACTIONS.DISPLAY_PHOTO_DETAILS, payload: { modalOpen: true } });
   };
 
   const onClosePhotoDetailsModal = () => {
+    // Function to close the photo details modal
     dispatch({ type: ACTIONS.DISPLAY_PHOTO_DETAILS, payload: { modalOpen: false } });
   };
 
   const getPhotosByTopic = async (topicId) => {
+    // Async function to fetch photos by topic
     try {
       const response = await fetch(`http://localhost:8001/api/topics/photos/${topicId}`);
       const data = await response.json();

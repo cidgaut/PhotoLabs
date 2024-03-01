@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 
 import '../styles/PhotoDetailsModal.scss'
 import closeSymbol from '../assets/closeSymbol.svg';
@@ -7,8 +7,11 @@ import PhotoList from '../components/PhotoList';
 
 const PhotoDetailsModal = (props) => {
   const [favoritePhotos, setFavoritePhotos] = useState([]);
-  const { setModal, selectedPhoto } = props;
+  const { setModal, selectedPhoto, favPhotos, setFavPhotos} = props;
+  //console.log("Selected Photo:", selectedPhoto)
   const similar_photosArray = Object.values(selectedPhoto.similar_photos || {});
+  const { id } = selectedPhoto;
+  //console.log("id", id);
 
   const toggleFavorite = (photoId) => {
     //favorite now works for their respective image in the modal
@@ -19,9 +22,14 @@ const PhotoDetailsModal = (props) => {
     );
   };
 
-  useEffect(() => {
-    //log photo details to console when selectedPhoto changes
-  }, [selectedPhoto]);
+  const photoIsFavorited = useMemo(() => {
+    if (favPhotos.includes(id)) {
+      console.log("Yay")
+      return true;
+    }
+    console.log("Nay")
+    return false;
+  }, [id, favPhotos])
   
   const toggleModal = () => {
     setModal((prevModal) => !prevModal);
@@ -35,11 +43,19 @@ const PhotoDetailsModal = (props) => {
       </button>
 
       <div className='photo-details-modal__images'>
-      <PhotoFavButton
+      {/* <PhotoFavButton
         toggleFavorite={() => toggleFavorite(selectedPhoto.id)}
         isFavorite={favoritePhotos.includes(selectedPhoto.id)}
-      />
         
+      /> */}
+        
+        <PhotoFavButton
+          isFavorite={setFavPhotos}
+          id={id}
+          photoIsFavorited={photoIsFavorited}
+        />
+
+
         <img src={selectedPhoto.urls.full} className='photo-details-modal__image' />
         <div className="photo-details-modal__photographer-details">
           <img src={selectedPhoto.user.profile}  className="photo-details-modal__photographer-profile" />
@@ -56,6 +72,7 @@ const PhotoDetailsModal = (props) => {
           favoritePhotos={favoritePhotos}
           setModal={setModal} 
           toggleFavorite={toggleFavorite}
+          
           />
         </div>
       </div>

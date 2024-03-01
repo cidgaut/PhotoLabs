@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import FavIcon from './FavIcon';
 import '../styles/PhotoFavButton.scss';
 
-function PhotoFavButton({ toggleFavorite, isFavorite}) {
-  const handleClick = (event, photo) => {
-    event.stopPropagation();
-    toggleFavorite();
-  }
+function PhotoFavButton({ toggleFavorite, isFavorite, photoIsFavorited, id}) {
+  // const handleClick = (event, photo) => {
+  //   event.stopPropagation();
+  //   toggleFavorite();
+  // }
+
+  const handleClick = useCallback(() => {
+    photoIsFavorited(id)
+  })
 
 
   return (

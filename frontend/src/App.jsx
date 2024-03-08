@@ -20,8 +20,6 @@ const App = () => {
     getPhotosByTopic,
   } = useApplicationData();
 
-  console.log("get photos by topic:", getPhotosByTopic)
-
   return (
     <div className="App">
 

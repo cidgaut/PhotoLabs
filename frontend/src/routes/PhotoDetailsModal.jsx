@@ -10,15 +10,6 @@ const PhotoDetailsModal = (props) => {
   const { setModal, selectedPhoto, favoritePhotos, toggleFavorite } = props;
   const similar_photosArray = Object.values(selectedPhoto.similar_photos || {});
 
-  // const toggleFavorite = (photoId) => {
-    //favorite now works for their respective image in the modal
-    // setFavoritePhotos((prevFavorites) =>
-      // prevFavorites.includes(photoId)
-        // ? prevFavorites.filter((id) => id !== photoId)
-        // : [...prevFavorites, photoId]
-    // );
-  // };
-
   useEffect(() => {
     //log photo details to console when selectedPhoto changes
   }, [selectedPhoto]);

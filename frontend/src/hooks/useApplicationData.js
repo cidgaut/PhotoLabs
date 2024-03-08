@@ -103,7 +103,11 @@ export const ACTIONS = {
 
   const updateToFavPhotoIds = (photoId) => {
     // Function to update favorite photos
+  if (state.favoritePhotos.includes(photoId)) {
+    dispatch({ type: ACTIONS.FAV_PHOTO_REMOVED, payload: { id: photoId } });
+  } else {
     dispatch({ type: ACTIONS.FAV_PHOTO_ADDED, payload: { id: photoId } });
+  }
   };
 
   const setPhotoSelected = (photo) => {
@@ -139,3 +143,5 @@ export const ACTIONS = {
 };
 
 export default useApplicationData;
+
+//return to this

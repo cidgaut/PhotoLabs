@@ -36,6 +36,7 @@ const App = () => {
         favoritePhotos={state.favoritePhotos}
         setFavoritePhotos={updateToFavPhotoIds}
         getPhotosByTopic={getPhotosByTopic}
+        toggleFavorite={updateToFavPhotoIds}
       />
 
       {/* PhotoDetailsModal if modal is true */}
@@ -46,6 +47,7 @@ const App = () => {
         modal={state.modalOpen}
         favoritePhotos={state.favoritePhotos}
         setFavoritePhotos={updateToFavPhotoIds}
+        toggleFavorite={updateToFavPhotoIds}
       />
       )}
     </div>

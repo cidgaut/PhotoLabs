@@ -8,6 +8,8 @@ const PhotoList = (props) => {
 
   const { photos, toggleFavorite, favoritePhotos, setPhotoSelected }= props;
 
+  console.log("Toggle Favorite:",toggleFavorite);
+
 
   const photoItems = photos.map((photo) => (
     <PhotoListItem
